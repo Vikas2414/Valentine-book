@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sejal ❤️</title>
+    <style>
+        :root {
+            --primary-color: #ffb6c1; /* Pastel Pink */
+            --text-color: #5a3e36;    /* Warm Brown */
+            --bg-color: #ffe6e9;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Courier New', Courier, monospace; /* Vintage Typewriter feel */
+            overflow: hidden;
+        }
+
+        /* Password Overlay */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #login-screen h2 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+        }
+
+        button.unlock-btn {
+            margin-top: 15px;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Book Structure */
+        .book {
+            position: relative;
+            width: 350px;
+            height: 500px;
+            perspective: 1500px;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            backface-visibility: hidden;
+        }
+
+        /* Stacking pages */
+        #p1 { z-index: 4; }
+        #p2 { z-index: 3; }
+        #p3 { z-index: 2; }
+        #p4 { z-index: 1; }
+
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* Content Styling */
+        h2 {
+            color: #d6336c;
+            font-size: 24px;
+        }
+        
+        p {
+            font-size: 16px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        img {
+            width: 150px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Vintage aesthetic touches */
+        .vintage-border {
+            border: 2px dashed var(--primary-color);
+            padding: 10px;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h2>Enter The Date We Become One ❤️</h2>
+        <p>(Hint: DDMMYYYY)</p>
+        <input type="password" id="password" placeholder="Enter Date">
+        <button class="unlock-btn" onclick="checkPassword()">Open Heart</button>
+        <p class="error-msg" id="error">Wrong date! Try again 💔</p>
+    </div>
+
+    <div class="book">
+        
+        <div class="page" id="p1">
+            <h2>Happy Valentine’s Day<br>Sejal 🌹</h2>
+            <img src="https://media.tenor.com/hmYv6-dCkGgAAAAi/bubu-dudu-bubu.gif" alt="Cute Bears">
+            <p>This little book is for my future wife.<br>Turn the pages slowly...</p>
+            <button class="nav-btn" onclick="goNext(1)">Open Chapter 1 ➡️</button>
+        </div>
+
+        <div class="page" id="p2">
+            <h2>Our Vintage Romance 🎞️</h2>
+            <img src="https://media.tenor.com/f2Q8uF4F5dMAAAAi/bubu-dudu-sseeyall.gif" alt="Love">
+            <div class="vintage-border">
+                <p>Loving you feels like a 90s classic song.</p>
+                <p>No filters, no drama.<br>Just pure, simple love.</p>
+                <p>You are the heroine of my story.</p>
+            </div>
+            <button class="nav-btn" onclick="goNext(2)">Next Page ➡️</button>
+        </div>
+
+        <div class="page" id="p3">
+            <h2>The Countdown Begins ⏳</h2>
+            <img src="https://media.tenor.com/Wait9s6qgzkAAAAi/bubu-dudu.gif" alt="Wedding">
+            <p><strong>📍 Chittorgarh</strong><br><strong>📅 Feb 21, 2026</strong></p>
+            <p>I can't wait to see you in your bridal dress.<br>The world will see our promise fulfilled.</p>
+            <button class="nav-btn" onclick="goNext(3)">Read Poem ➡️</button>
+        </div>
+
+        <div class="page" id="p4">
+            <h2>Forever Yours ❤️</h2>
+            <p>Na chand ki chah,<br>Na taaron ki farmaish,</p>
+            <p>Bas <strong>Sejal</strong> ko apna banane ki hai khwaish.</p>
+            <p>Chittorgarh ki wo sham yaadgar hogi,<br>Jab tu hamesha ke liye meri hogi.</p>
+            <br>
+            <p>- Love, Vikas</p>
+            <button class="nav-btn" onclick="closeBook()">Start Over ↺</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Password Logic
+        function checkPassword() {
+            const input = document.getElementById('password').value;
+            // Password is set to your wedding date: 21022026
+            if (input === '21022026') {
+                document.getElementById('login-screen').style.display = 'none';
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Page Turning Logic
+        function goNext(pageNumber) {
+            const currentPage = document.getElementById('p' + pageNumber);
+            currentPage.classList.add('flipped');
+            currentPage.style.zIndex = pageNumber; // Move behind
+        }
+
+        function closeBook() {
+            // Reset all pages
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('p' + i).classList.remove('flipped');
+                // Reset z-index after delay to smooth animation
+                setTimeout(() => {
+                    document.getElementById('p1').style.zIndex = 4;
+                    document.getElementById('p2').style.zIndex = 3;
+                    document.getElementById('p3').style.zIndex = 2;
+                    document.getElementById('p4').style.zIndex = 1;
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
