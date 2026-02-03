@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Khushboo ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         /* --- GLOBAL STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Georgia", serif; }
         
         body {
             height: 100vh;
-            /* Soft Pink Gradient Background */
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); 
-            background-color: #ffe6e9;
+            background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,36 +20,48 @@
             text-align: center;
         }
 
-        /* --- SCREEN 1: THE PROPOSAL --- */
-        #proposal-screen {
+        /* Utility Class to hide sections */
+        .hidden { display: none !important; opacity: 0; }
+        
+        /* Fade transition */
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- SECTION 1: THE PROPOSAL (Abhinav Style) --- */
+        #proposal-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: opacity 1s ease;
+            gap: 20px;
             max-width: 90%;
+            z-index: 10;
         }
 
         .gif-container img {
             width: 200px;
-            height: auto;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
         h1 {
             color: #d81b60;
-            margin-top: 20px;
-            font-size: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
-        .dynamic-text {
+        .emotional-text {
             color: #c2185b;
-            font-size: 1.1rem;
-            margin: 15px 0;
-            min-height: 20px;
+            font-size: 1.2rem;
+            min-height: 30px;
             font-weight: bold;
+            margin-top: 10px;
         }
 
         .btn-group {
@@ -58,57 +69,47 @@
             display: flex;
             gap: 20px;
             justify-content: center;
+            align-items: center;
         }
 
         button {
-            padding: 12px 30px;
+            padding: 15px 40px;
             font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         #yes-btn {
-            background-color: #ff4081;
+            background-color: #4CAF50;
             color: white;
         }
-        #yes-btn:hover { transform: scale(1.1); background-color: #f50057; }
+
+        #yes-btn:hover { transform: scale(1.1); }
 
         #no-btn {
-            background-color: #b0bec5;
+            background-color: #f44336;
             color: white;
         }
-        #no-btn:hover { transform: scale(1.1); background-color: #78909c; }
 
-        /* The button to transition to the book */
-        #open-gift-btn {
-            display: none; /* Hidden initially */
-            margin-top: 20px;
-            background: linear-gradient(45deg, #ff5f6d, #ffc371);
-            color: white;
-            animation: pulse 2s infinite;
+        /* --- SECTION 2: THE CELEBRATION (Intermediate) --- */
+        #celebration-container {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* --- SCREEN 2: THE BOOK --- */
-        #book-screen {
-            display: none; /* Hidden initially */
-            opacity: 0;
-            transition: opacity 1.5s ease;
+        /* --- SECTION 3: THE BOOK (Your Code) --- */
+        #book-wrapper {
+            display: none; /* Hidden by default */
             perspective: 1500px;
         }
 
         .book {
-            width: 300px;
-            height: 450px;
+            width: 340px;
+            height: 480px;
             position: relative;
             transform-style: preserve-3d;
         }
@@ -117,226 +118,218 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(145deg, #ff5f6d, #ffc371);
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
             transform-origin: left;
+            transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 22px;
+            color: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
-            text-align: center;
-            /* Gradient for page background */
-            background: linear-gradient(135deg, #fff0f3 0%, #fff 100%);
-            border-left: 5px solid #ff4081;
+            justify-content: space-between;
         }
 
-        /* Z-Index logic for stacking pages */
-        #p1 { z-index: 4; }
-        #p2 { z-index: 3; }
-        #p3 { z-index: 2; }
-        #p4 { z-index: 1; }
-
-        .page.flipped {
-            transform: rotateY(-180deg);
-        }
-
-        /* Page Content Styles */
-        .page h2 { color: #d81b60; margin-bottom: 15px; }
-        .page p { color: #555; line-height: 1.6; font-size: 14px; }
-        .page img { width: 80%; border-radius: 10px; margin-bottom: 10px; }
+        .page.flipped { transform: rotateY(-180deg); }
+        
+        /* Book Content Styling */
+        .page h2 { font-size: 22px; margin-bottom: 10px; }
+        .page p { font-size: 16px; line-height: 1.4; }
+        .gif-box { background: rgba(255,255,255,0.3); padding: 10px; border-radius: 10px; width: 100%; margin: 10px 0; }
+        .gif-box img { width: 100%; border-radius: 8px; }
         
         .next-btn {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            cursor: pointer;
             font-size: 24px;
-            color: #ff4081;
-            animation: bounce 1.5s infinite;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
+        
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
-        @keyframes bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
-
-        /* Lock Overlay Styles */
+        /* Lock Screen */
         .lock-overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            z-index: 10;
+            inset: 0;
+            background: #ff758c;
+            border-radius: 18px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
+            z-index: 50;
         }
-        .hidden { display: none !important; }
         
-        input {
+        .lock-input {
             padding: 10px;
-            margin: 10px;
-            border: 2px solid #ff4081;
-            border-radius: 5px;
-            outline: none;
+            border-radius: 8px;
+            border: none;
+            margin: 10px 0;
             text-align: center;
+            font-size: 16px;
         }
 
     </style>
 </head>
 <body>
 
-    <div id="proposal-screen">
+    <div id="proposal-container">
         <div class="gif-container">
-            <img id="main-gif" src="https://media.tenor.com/y8U-50yA3OAAAAAj/cute-bear.gif" alt="Cute Bear">
+            <img id="main-gif" src="https://media.tenor.com/y8U-50yA3OAAAAAj/cute-bear.gif" alt="Asking Bear">
         </div>
+        <h1>Will you be my Valentine?</h1>
         
-        <h1 id="main-text">Will you be my Valentine?</h1>
-        
-        <div id="message-container" class="dynamic-text"></div>
+        <div id="message-box" class="emotional-text"></div>
 
         <div class="btn-group">
-            <button id="yes-btn" onclick="handleYes()">Yes! ❤️</button>
-            <button id="no-btn" onclick="handleNo()">No 💔</button>
+            <button id="yes-btn" onclick="handleYes()">YES! ❤️</button>
+            <button id="no-btn" onclick="handleNo()">No</button>
         </div>
-
-        <button id="open-gift-btn" onclick="openBook()">Open Your Gift 🎁</button>
     </div>
 
+    <div id="celebration-container">
+        <div class="gif-container">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Bear">
+        </div>
+        <h1 style="margin-top:20px;">I knew it! ❤️</h1>
+        <p style="font-size: 1.2rem; color: #fff;">Wait for it...</p>
+    </div>
 
-    <div id="book-screen">
+    <div id="book-wrapper">
         <div class="book">
-            
-            <div class="page" id="p1">
-                <div class="lock-overlay" id="lock-layer">
-                    <h2>Wait!</h2>
-                    <p>Enter the secret password to open my heart.</p>
-                    <input type="text" id="password-input" placeholder="Hint: LOVE">
-                    <button onclick="checkPassword()" style="background:#ff4081; color:white; padding:5px 15px; margin-top:5px; font-size:1rem;">Unlock</button>
-                    <p id="error-msg" style="color:red; font-size:12px; margin-top:5px;"></p>
+            <div class="page" style="z-index: 4;">
+                <div class="lock-overlay" id="lock-screen">
+                    <h2>One last step...</h2>
+                    <p>Enter the password:</p>
+                    <input type="password" id="password-input" class="lock-input" placeholder="Hint: L_ _ E">
+                    <button onclick="checkPassword()" style="font-size:16px; padding: 8px 20px; background: white; color: #ff758c;">Unlock</button>
+                    <p id="error-msg" style="color: yellow; font-size: 14px; margin-top: 5px;"></p>
                 </div>
                 
                 <div class="page-content">
-                    <h2>You Said YES! 🌹</h2>
-                    <img src="https://media.tenor.com/2l1y144c_C4AAAAi/bear-couple.gif" alt="Happy">
-                    <p>Khushboo, you have no idea how happy you just made me. <br><br> Turn the page...</p>
-                    <div class="next-btn" onclick="flipPage(1)">➡️</div>
+                    <h2>You unlocked my heart! 🌹</h2>
+                    <div class="gif-box">
+                        <img src="https://media.tenor.com/Ub6s6yD1WwEAAAAi/mochi-peach.gif" alt="Love">
+                    </div>
+                    <p>Khushboo, turn the pages to see why you are my favorite person.</p>
+                    <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
                 </div>
             </div>
 
-            <div class="page" id="p2">
-                <h2>My Favorite Person</h2>
-                <img src="https://media.tenor.com/tH03pZ18vJAAAAAi/peach-goma-angry.gif" alt="Cute">
-                <p>Even when I am annoying (like asking you 100 times), you are still my favorite person in the world.</p>
-                <div class="next-btn" onclick="flipPage(2)">➡️</div>
+            <div class="page" style="z-index: 3;">
+                <h2>The Best Decision 💍</h2>
+                <div class="gif-box">
+                    <img src="https://media.tenor.com/mU_6Ym6V998AAAAi/milk-and-mocha-bear-couple.gif" alt="Together">
+                </div>
+                <p>I know we are getting married soon, but I still want to ask you out every single day.</p>
+                <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" id="p3">
-                <h2>Our Future</h2>
-                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Kiss">
-                <p>I promise to always bring you chocolates, handle your mood swings, and love you forever.</p>
-                <div class="next-btn" onclick="flipPage(3)">➡️</div>
+            <div class="page" style="z-index: 2;">
+                <h2>My Promise 🤞</h2>
+                <div class="gif-box">
+                    <img src="https://media.tenor.com/0BlLAI6vIhoAAAAi/tkthao219-bubududu.gif" alt="Promise">
+                </div>
+                <p>I promise to handle your mood swings and always bring you food when you're angry.</p>
+                <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" id="p4">
-                <h2>Happy Valentine's!</h2>
-                <p>I love you, Khushboo! <br><br> Forever Yours,<br> [Your Name]</p>
+            <div class="page" style="z-index: 1;">
+                <h2>Happy Valentine's! ❤️</h2>
+                <div class="gif-box">
+                    <img src="https://media.tenor.com/5T9NoewNL9EAAAAi/bubu-dudu.gif" alt="Happy">
+                </div>
+                <p>I love you more than words can say.<br><br>- Vikas</p>
             </div>
-
         </div>
     </div>
 
     <script>
-        // --- CONFIGURATION ---
-        const password = "LOVE"; // Change this if you want
+        // --- DATA CONFIGURATION ---
+        const noTexts = [
+            "Khushboo, please?", 
+            "Don't do this to me! 🥺", 
+            "I'm going to cry...", 
+            "Khushboo, look at my sad face!", 
+            "Okay, now I'm actually crying 😭",
+            "Just press YES already! ❤️"
+        ];
         
-        // --- ASSETS ---
-        const gifs = {
-            cute: "https://media.tenor.com/y8U-50yA3OAAAAAj/cute-bear.gif",
-            angry: "https://media.tenor.com/tH03pZ18vJAAAAAi/peach-goma-angry.gif", // Angry Bubu
-            crying: "https://media.tenor.com/j1Abk8qP2iAAAAAi/peach-goma-crying.gif", // Crying Bubu
-            happy: "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" // Hug/Kiss
-        };
-
-        const messages = [
-            "Khushboo, soch lo acche se! 😤",
-            "Arey aise mat karo... 🥺",
-            "Dil toot jayega mera... 💔",
-            "Man jao na please... 😭",
-            "Last chance Khushboo! 😡"
+        const sadGifs = [
+            "https://media.tenor.com/83Jg63aA4sIAAAAj/bubu-dudu-cry.gif", // Crying 1
+            "https://media.tenor.com/w1-nC1tS5PAAAAAj/bear-cry-sad.gif", // Crying 2
+            "https://media.tenor.com/K2y1vIe4p4UAAAAj/cute-bear.gif"     // Sad pleading
         ];
 
-        // --- STATE ---
-        let noClickCount = 0;
+        let clickCount = 0;
 
         // --- FUNCTIONS ---
 
+        // 1. Handle "No" Click
         function handleNo() {
-            const img = document.getElementById('main-gif');
-            const msgContainer = document.getElementById('message-container');
+            clickCount++;
             
-            // 1. Change GIF based on clicks
-            if (noClickCount === 0) {
-                img.src = gifs.angry; // First No = Angry
-            } else {
-                img.src = gifs.crying; // Subsequent Nos = Crying
-            }
-
-            // 2. Add Text
-            if (noClickCount < messages.length) {
-                const newText = document.createElement('p');
-                newText.innerText = messages[noClickCount];
-                msgContainer.appendChild(newText);
-            }
-
-            noClickCount++;
+            // 1. Add Text
+            const msgBox = document.getElementById('message-box');
+            const newText = document.createElement('div');
+            // Cycle through texts if clicks exceed array length
+            newText.innerHTML = noTexts[Math.min(clickCount - 1, noTexts.length - 1)]; 
+            msgBox.appendChild(newText);
+            
+            // 2. Change GIF to Sad
+            const mainGif = document.getElementById('main-gif');
+            // Cycle through sad GIFs
+            mainGif.src = sadGifs[clickCount % sadGifs.length];
+            
+            // 3. Make Yes Button Grow (Optional funny effect)
+            const yesBtn = document.getElementById('yes-btn');
+            let currentSize = 1.2 + (clickCount * 0.2);
+            yesBtn.style.transform = `scale(${currentSize})`;
         }
 
+        // 2. Handle "Yes" Click
         function handleYes() {
-            // 1. Confetti
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-
-            // 2. Change GIF to Happy
-            document.getElementById('main-gif').src = gifs.happy;
+            // Hide Proposal
+            document.getElementById('proposal-container').classList.add('hidden');
             
-            // 3. Change Text
-            document.getElementById('main-text').innerText = "YAY! I knew it! ❤️";
-            document.getElementById('message-container').innerHTML = ""; // Clear sad messages
-            
-            // 4. Hide Buttons & Show "Open Gift"
-            document.querySelector('.btn-group').style.display = 'none';
-            document.getElementById('open-gift-btn').style.display = 'block';
-        }
+            // Show Celebration
+            const celebration = document.getElementById('celebration-container');
+            celebration.style.display = 'flex';
+            celebration.classList.add('fade-in');
 
-        function openBook() {
-            // Transition from Proposal Screen to Book Screen
-            document.getElementById('proposal-screen').style.opacity = '0';
+            // Fire Confetti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            
+            // Wait 3 seconds, then show Book
             setTimeout(() => {
-                document.getElementById('proposal-screen').style.display = 'none';
-                const bookScreen = document.getElementById('book-screen');
-                bookScreen.style.display = 'flex';
-                // Small timeout to allow display:flex to apply before opacity transition
-                setTimeout(() => {
-                    bookScreen.style.opacity = '1';
-                }, 50);
-            }, 1000);
+                celebration.classList.add('hidden');
+                const book = document.getElementById('book-wrapper');
+                book.style.display = 'block';
+                book.classList.add('fade-in');
+            }, 3500);
         }
 
-        // --- BOOK LOGIC ---
-
+        // 3. Book Logic
         function checkPassword() {
-            const input = document.getElementById('password-input').value.toUpperCase().trim();
-            if (input === password) {
-                document.getElementById('lock-layer').classList.add('hidden');
-                confetti({ particleCount: 100, spread: 60, origin: { y: 0.6 } });
+            const input = document.getElementById('password-input').value.toUpperCase();
+            if(input === "LOVE") {
+                document.getElementById('lock-screen').classList.add('hidden');
             } else {
-                document.getElementById('error-msg').innerText = "Wrong password! Hint: What do we do? (L_ _ E)";
+                document.getElementById('error-msg').innerText = "Wrong password! Try 'LOVE'";
             }
         }
 
-        function flipPage(pageNum) {
-            document.getElementById('p' + pageNum).classList.add('flipped');
+        function flipPage(element) {
+            // Find the parent .page and add the flipped class
+            element.closest('.page').classList.add('flipped');
         }
 
     </script>
