@@ -1,328 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Sejal ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Book</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Georgia", serif; }
+        body {
+            height: 100vh;
+            background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Georgia", serif;
-}
+        /* Floating hearts */
+        .heart {
+            position: absolute; bottom: -20px; color: rgba(255,255,255,0.8);
+            animation: floatUp linear infinite; pointer-events: none;
+        }
+        @keyframes floatUp {
+            from { transform: translateY(0) scale(1); opacity: 1; }
+            to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+        }
 
-body {
-    height: 100vh;
-    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+        .book { width: 340px; height: 480px; perspective: 1500px; position: relative; }
 
-/* Floating hearts */
-.heart {
-    position: absolute;
-    bottom: -20px;
-    color: rgba(255,255,255,0.8);
-    animation: floatUp linear infinite;
-    pointer-events: none;
-}
+        .page {
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(145deg, #ff5f6d, #ffc371);
+            border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            transform-origin: left; transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 22px; color: #fff;
+        }
 
-@keyframes floatUp {
-    from { transform: translateY(0) scale(1); opacity: 1; }
-    to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-}
+        .page.flipped { transform: rotateY(-180deg); }
 
-/* Book */
-.book {
-    width: 340px;
-    height: 480px; /* Slightly taller for text */
-    perspective: 1500px;
-    position: relative;
-}
+        .page-content { backface-visibility: hidden; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
 
-/* Page */
-.page {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(145deg, #ff5f6d, #ffc371);
-    border-radius: 18px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-    transform-origin: left;
-    transform-style: preserve-3d;
-    transition: transform 1s ease;
-    padding: 22px;
-    color: #fff;
-}
+        .page h2 { font-weight: normal; text-align: center; font-size: 22px; }
+        .page p { font-size: 14px; line-height: 1.4; text-align: center; }
 
-.page.flipped {
-    transform: rotateY(-180deg);
-}
+        .gif-box { background: rgba(255,255,255,0.25); padding: 8px; border-radius: 14px; width: 100%; }
+        .gif-box img { width: 100%; border-radius: 12px; }
 
-/* Page content */
-.page-content {
-    backface-visibility: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
+        .nav-btns { display: flex; gap: 20px; }
+        .next, .back { font-size: 26px; cursor: pointer; animation: bounce 1.5s infinite; user-select: none; }
 
-.page h2 {
-    font-weight: normal;
-    text-align: center;
-    margin-bottom: 10px;
-}
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-.page p {
-    font-size: 15px;
-    line-height: 1.5;
-    text-align: center;
-}
-
-/* GIF */
-.gif-box {
-    background: rgba(255,255,255,0.25);
-    padding: 10px;
-    border-radius: 14px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.gif-box img {
-    width: 100%;
-    border-radius: 12px;
-}
-
-/* Arrow */
-.next {
-    font-size: 26px;
-    cursor: pointer;
-    animation: bounce 1.5s infinite;
-    margin-top: 10px;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-}
-
-/* Page order */
-.page:nth-child(1) { z-index: 5; }
-.page:nth-child(2) { z-index: 4; }
-.page:nth-child(3) { z-index: 3; }
-.page:nth-child(4) { z-index: 2; }
-.page:nth-child(5) { z-index: 1; }
-
-/* Last page fix */
-.page.last .page-content {
-    justify-content: center;
-}
-
-.page.last p {
-    margin-top: 12px;
-}
-
-/* 🔒 DATE LOCK */
-.lock-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(145deg, #ff758c, #ff7eb3);
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.lock-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.lock-title {
-    font-size: 18px;
-    margin-bottom: 12px;
-    color: #fff;
-    text-align: center;
-}
-
-.lock-input {
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 14px;
-    text-align: center;
-    outline: none;
-    width: 160px;
-}
-
-.lock-btn {
-    margin-top: 12px;
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: none;
-    background: #fff;
-    color: #ff5f6d;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.lock-error {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #fff;
-    opacity: 0;
-}
-
-.lock-error.show {
-    opacity: 1;
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-</style>
+        /* Lock Screen */
+        .lock-overlay {
+            position: absolute; inset: 0; background: linear-gradient(145deg, #ff758c, #ff7eb3);
+            border-radius: 18px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 10;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .lock-overlay.hidden { opacity: 0; visibility: hidden; }
+        .lock-input { border: none; border-radius: 10px; padding: 10px; text-align: center; outline: none; width: 160px; margin-bottom: 10px; }
+        .lock-btn { padding: 8px 18px; border-radius: 20px; border: none; background: #fff; color: #ff5f6d; cursor: pointer; font-weight: bold; }
+        .lock-error { margin-top: 10px; font-size: 12px; color: #fff; display: none; }
+        
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    </style>
 </head>
-
 <body>
 
 <div class="book">
-
-<div class="page">
-    <div class="lock-overlay" id="lock">
-        <div class="lock-title">Enter our Special Date<br>(Hint: Wedding Date)</div>
-        <input class="lock-input" id="lockInput" placeholder="DDMMYYYY">
-        <button class="lock-btn" id="unlockBtn">Unlock Heart</button>
-        <div class="lock-error" id="lockError">Wrong date! Try again 💔</div>
-    </div>
-
-    <div class="page-content">
-        <h2>Happy Valentine’s Day Sejal 🌹💌</h2>
-        <p>
-            This little book is made just for my future wife 🫠<br><br>
-            Turn the pages slowly,<br>
-            every one holds a feeling.
-        </p>
-        <div class="next" style="display:none;">➡️</div>
-    </div>
-</div>
-
-<div class="page">
-    <div class="page-content">
-        <h2 style="font-size:20px;">My Vintage Romance 🌹</h2>
-        <div class="gif-box">
-            <img src="https://media.tenor.com/hmYv6-dCkGgAAAAi/bubu-dudu-bubu.gif">
+    <div class="page" style="z-index: 5;">
+        <div class="lock-overlay" id="lock">
+            <div style="margin-bottom: 10px;">Enter Password</div>
+            <input class="lock-input" id="lockInput" type="password" placeholder="Hint: L_ _ E">
+            <button class="lock-btn" id="unlockBtn">Unlock</button>
+            <div class="lock-error" id="lockError">Wrong password💔</div>
         </div>
-        <p>
-            Loving you feels like a 90s classic song.<br>
-            No filters, no drama.<br>
-            Just pure, simple, forever love. 🫠
-        </p>
-        <div class="next">➡️</div>
-    </div>
-</div>
-
-<div class="page">
-    <div class="page-content">
-        <h2 style="font-size:15px;">You are my Safe Space 💌</h2>
-        <div class="gif-box">
-            <img src="https://media.tenor.com/0BlLAI6vIhoAAAAi/tkthao219-bubududu.gif">
+        <div class="page-content">
+            <h2>Happy Valentine’s Day 🌹</h2>
+            <p>This little book is made just for you.<br><br>Turn the pages slowly,<br>every one holds a feeling.</p>
+            <div class="next">➡️</div>
         </div>
-        <p style="font-size:12px;">
-            Sorry for whenever I make you angry.<br>
-            I will always be your firebrigade 🚒<br>
-            Your smile is the only thing that matters to me.
-        </p>
-        <div class="next">➡️</div>
     </div>
-</div>
 
-<div class="page">
-    <div class="page-content">
-        <h2 style="font-size:20px;">The Big Day ✨</h2>
-        <div class="gif-box">
-            <img src="https://media.tenor.com/5T9NoewNL9EAAAAi/bubu-dudu.gif">
+    <div class="page" style="z-index: 4;">
+        <div class="page-content">
+            <h2>Best Decision 🫠</h2>
+            <div class="gif-box"><img src="https://media.tenor.com/hmYv6-dCkGgAAAAi/bubu-dudu-bubu.gif"></div>
+            <p>Loving you was my best decision.<br>Will always be your baby bear 🐻</p>
+            <div class="nav-btns"><div class="back">⬅️</div><div class="next">➡️</div></div>
         </div>
-        <p>
-            <strong>📍 Chittorgarh | Feb 21, 2026</strong><br><br>
-            The world shall see us getting married.<br>
-            That is my manifestation and my promise to you. 🥹❤️
-        </p>
-        <div class="next">➡️</div>
     </div>
-</div>
 
-<div class="page last">
-    <div class="page-content">
-        <h2>Forever Yours ❤️</h2>
-        <p>
-            Na chand ki chah,<br>
-            Na taaron ki farmaish,<br>
-            Bas <strong>Sejal</strong> ko apna banane ki hai khwaish.<br><br>
-            Chittorgarh ki wo sham yaadgar hogi,<br>
-            Jab tu hamesha ke liye meri hogi.
-            <br><br>
-            I love you more than you can imagine.<br>
-            <br>
-            - Vikas
-        </p>
+    <div class="page" style="z-index: 3;">
+        <div class="page-content">
+            <h2>The Firebrigade 🚒</h2>
+            <div class="gif-box"><img src="https://media.tenor.com/0BlLAI6vIhoAAAAi/tkthao219-bubududu.gif"></div>
+            <p>I'm sorry for when I'm annoying.<br>I'll always be your firebrigade to put out the anger!</p>
+            <div class="nav-btns"><div class="back">⬅️</div><div class="next">➡️</div></div>
+        </div>
     </div>
-</div>
 
+    <div class="page" style="z-index: 2;">
+        <div class="page-content">
+            <h2>Manifesting Us ✨</h2>
+            <div class="gif-box"><img src="https://media.tenor.com/5T9NoewNL9EAAAAi/bubu-dudu.gif"></div>
+            <p>The world shall see us getting married.<br>That's my manifestation. ❤️</p>
+            <div class="nav-btns"><div class="back">⬅️</div><div class="next">➡️</div></div>
+        </div>
+    </div>
+
+    <div class="page" style="z-index: 1;">
+        <div class="page-content" style="justify-content: flex-start; gap: 15px;">
+            <h2>Forever ❤️</h2>
+            <p style="text-align: justify; font-size: 13px;">
+                Lost the moment I saw those beautiful brown eyes... got the ticklish feeling that the world knows as "love at first sight."<br><br>
+                Never thought you were the woman of my dreams, but look at me looking for you in every dream. I may be irritating, but I love you more than you imagine.<br><br>
+                Only for you, madam! 🌹💌
+            </p>
+            <div class="back" style="margin-top: auto;">⬅️ Start Over</div>
+        </div>
+    </div>
 </div>
 
 <script>
-/* Page flip */
-document.querySelectorAll(".page").forEach(page => {
-    const next = page.querySelector(".next");
-    if (next) next.onclick = () => page.classList.add("flipped");
-});
+    // Navigation logic
+    document.querySelectorAll(".page").forEach((page, index) => {
+        const next = page.querySelector(".next");
+        const back = page.querySelector(".back");
+        
+        if (next) next.onclick = () => page.classList.add("flipped");
+        if (back) {
+            back.onclick = () => {
+                if (index === 4) { // Last page reset
+                    document.querySelectorAll(".page").forEach(p => p.classList.remove("flipped"));
+                } else {
+                    document.querySelectorAll(".page")[index - 1].classList.remove("flipped");
+                }
+            };
+        }
+    });
 
-/* Date unlock */
-// PASSWORD SET HERE:
-const correctPassword = "21022026"; 
+    // Password logic
+    const btn = document.getElementById("unlockBtn");
+    btn.onclick = () => {
+        const input = document.getElementById("lockInput").value.toUpperCase();
+        if (input === "LOVE") {
+            document.getElementById("lock").classList.add("hidden");
+        } else {
+            const err = document.getElementById("lockError");
+            err.style.display = "block";
+            document.getElementById("lock").style.animation = "shake 0.4s";
+            setTimeout(() => { document.getElementById("lock").style.animation = ""; }, 400);
+        }
+    };
 
-const lock = document.getElementById("lock");
-const input = document.getElementById("lockInput");
-const btn = document.getElementById("unlockBtn");
-const error = document.getElementById("lockError");
-const firstArrow = document.querySelector(".page .next");
-
-btn.onclick = () => {
-    if (input.value.trim() === correctPassword) {
-        lock.classList.add("hidden");
-        firstArrow.style.display = "block";
-    } else {
-        error.classList.add("show");
-        lock.style.animation = "shake 0.4s";
-        setTimeout(() => lock.style.animation = "", 400);
+    // Hearts background
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (14 + Math.random() * 20) + "px";
+        heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
     }
-};
-
-/* Hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.textContent = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (14 + Math.random() * 24) + "px";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-}
-setInterval(createHeart, 350);
+    setInterval(createHeart, 400);
 </script>
 
 </body>
