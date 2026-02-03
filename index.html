@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Seju ❤️</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -15,168 +15,200 @@
         
         body {
             height: 100vh;
-            /* Soft gradient background */
-            background: linear-gradient(180deg, #ffdde1 0%, #ee9ca7 100%);
+            /* Romantic deep gradient */
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); 
+            background: radial-gradient(circle, rgba(255,221,225,1) 0%, rgba(238,156,167,1) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            font-family: 'Nunito', sans-serif;
-            position: relative;
+            font-family: 'Raleway', sans-serif;
         }
 
-        /* --- BACKGROUND HEARTS ANIMATION --- */
+        /* --- FLOATING HEARTS BACKGROUND --- */
         .bg-heart {
             position: absolute;
-            bottom: -20px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 20px;
-            animation: floatUp 8s linear infinite;
-            z-index: 0; /* Behind everything */
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 24px;
+            animation: floatUp 10s linear infinite;
+            z-index: 0;
             pointer-events: none;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* --- UTILITIES --- */
-        .hidden { display: none !important; opacity: 0; }
-        
-        /* Smooth Fade In */
-        .fade-in {
-            animation: fadeIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
         /* --- CONTAINER STYLES --- */
         #proposal-container, #celebration-container {
             z-index: 10;
             text-align: center;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.90);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             max-width: 90%;
-            width: 450px;
-            transition: opacity 0.5s ease;
+            width: 500px;
+            transition: all 0.8s ease;
+            position: absolute;
         }
 
-        /* Images */
+        /* GIF Styling */
         .gif-container img {
-            width: 180px;
+            width: 220px;
             height: auto;
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
-        .gif-container img:hover { transform: scale(1.05); }
 
         /* Typography */
         h1 {
             color: #d81b60;
-            font-family: 'Sacramento', cursive;
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
             line-height: 1.2;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
         }
 
         .emotional-text {
             color: #c2185b;
-            font-size: 1.1rem;
-            font-weight: 700;
-            min-height: 25px;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-height: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
         }
 
         /* Buttons */
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         button {
-            padding: 12px 30px;
-            font-size: 1.1rem;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Raleway', sans-serif;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        #yes-btn { background: #ff4d6d; color: white; }
-        #yes-btn:hover { background: #d90429; transform: scale(1.1); }
+        #yes-btn { 
+            background: linear-gradient(45deg, #ff4d6d, #ff0f3b); 
+            color: white; 
+            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.4);
+        }
+        #yes-btn:hover { transform: scale(1.1); }
 
-        #no-btn { background: #fff; color: #555; border: 2px solid #ddd; }
-        #no-btn:hover { background: #f0f0f0; }
+        #no-btn { 
+            background: white; 
+            color: #555; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #no-btn:hover { background: #f8f8f8; }
 
-        /* --- 3D BOOK STYLES --- */
+        /* --- 3D BOOK STYLES (Fixed) --- */
         #book-wrapper {
-            display: none;
-            perspective: 1500px;
+            display: none; /* Hidden by default */
+            perspective: 2000px; /* Stronger perspective for 3D effect */
             z-index: 20;
         }
 
         .book {
-            width: 320px;
-            height: 460px;
+            width: 350px;
+            height: 500px;
             position: relative;
             transform-style: preserve-3d;
+            transition: transform 1s;
         }
 
         .page {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transform-origin: left;
+            background: linear-gradient(135deg, #fff 0%, #fff0f3 100%);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            
+            /* CRITICAL FOR SMOOTH ANIMATION */
+            transform-origin: left center; 
             transform-style: preserve-3d;
-            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-            padding: 25px;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Ease-out quart */
+            
+            padding: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             text-align: center;
+            backface-visibility: hidden; /* Hides the back when flipped */
         }
 
-        .page.flipped { transform: rotateY(-180deg); }
+        /* Stacking Order */
+        #p1 { z-index: 4; }
+        #p2 { z-index: 3; }
+        #p3 { z-index: 2; }
+        #p4 { z-index: 1; }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* Book Content */
+        .page h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #e01e37;
+            margin-bottom: 15px;
+        }
         
-        /* Book Internals */
-        .page h2 { font-family: 'Sacramento', cursive; font-size: 2.2rem; color: #e01e37; }
-        .page p { font-size: 1rem; color: #555; line-height: 1.5; }
-        .gif-box img { width: 100%; border-radius: 10px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        
+        .page p {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .gif-box img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+
         .next-btn {
             background: #ff4d6d;
             color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 0.9rem;
             margin-top: 10px;
-            box-shadow: 0 3px 10px rgba(255, 77, 109, 0.4);
+            transition: 0.3s;
         }
+        .next-btn:hover { background: #d90429; }
 
         /* Lock Screen */
         .lock-overlay {
             position: absolute; inset: 0; background: #fff0f3;
-            border-radius: 15px; z-index: 50;
+            border-radius: 20px; z-index: 50;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .lock-input { padding: 8px; border: 2px solid #ffccd5; border-radius: 8px; margin: 10px 0; text-align: center; outline: none; }
+        .lock-input { padding: 12px; border: 2px solid #ffccd5; border-radius: 10px; margin: 15px 0; text-align: center; font-size: 18px; outline: none; width: 80%; }
+        
+        /* Utility */
+        .hidden { display: none !important; opacity: 0; }
+        .fade-in { animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -186,12 +218,11 @@
 
     <div id="proposal-container" class="fade-in">
         <div class="gif-container">
-            <img id="main-gif" src="https://media.tenor.com/2csFlkJ3TyAAAAAi/tkthao219-bubududu.gif" alt="Asking">
+            <img id="main-gif" src="https://media.tenor.com/y8U-50yA3OAAAAAj/cute-bear.gif" alt="Asking">
         </div>
         <h1>Will you be my Valentine?</h1>
+        <div id="message-box" class="emotional-text">For my favorite person, Seju ❤️</div>
         
-        <div id="message-box" class="emotional-text"></div>
-
         <div class="btn-group">
             <button id="yes-btn" onclick="handleYes()">YES! ❤️</button>
             <button id="no-btn" onclick="handleNo()">No</button>
@@ -202,142 +233,136 @@
         <div class="gif-container">
             <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Kissing">
         </div>
-        <h1>YAY! I knew it! ❤️</h1>
-        <p style="font-size: 1.2rem; margin-top: 10px;">Wait, I have a surprise for you...</p>
+        <h1>She Said Yes! ❤️</h1>
+        <p style="font-size: 1.3rem; margin-top: 10px;">Wait for it...</p>
     </div>
 
     <div id="book-wrapper">
         <div class="book">
-            <div class="page" style="z-index: 4;">
+            <div class="page" id="p1">
                 <div class="lock-overlay" id="lock-screen">
-                    <h2>One last step...</h2>
-                    <p>Enter the magic word:</p>
+                    <h2 style="font-size: 2.5rem;">One Small Step</h2>
+                    <p>What's the magic word?</p>
                     <input type="password" id="password-input" class="lock-input" placeholder="Hint: L_ _ E">
                     <button class="next-btn" onclick="checkPassword()">Unlock ❤️</button>
-                    <p id="error-msg" style="color: red; font-size: 12px; margin-top: 5px;"></p>
+                    <p id="error-msg" style="color: red; font-size: 14px; margin-top: 5px;"></p>
                 </div>
                 
                 <div class="page-content">
                     <h2>You Unlocked It!</h2>
                     <div class="gif-box"><img src="https://media.tenor.com/Ub6s6yD1WwEAAAAi/mochi-peach.gif"></div>
-                    <p>Khushboo, turn the page to see my heart...</p>
+                    <p>I knew you'd get it right.<br>Now turn the page...</p>
                     <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
                 </div>
             </div>
 
-            <div class="page" style="z-index: 3;">
+            <div class="page" id="p2">
                 <h2>Best Decision</h2>
                 <div class="gif-box"><img src="https://media.tenor.com/mU_6Ym6V998AAAAi/milk-and-mocha-bear-couple.gif"></div>
-                <p>Asking you to be mine was the best decision I ever made.</p>
+                <p>Choosing you was the best decision I ever made.</p>
                 <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" style="z-index: 2;">
-                <h2>My Promise</h2>
+            <div class="page" id="p3">
+                <h2>The Wedding</h2>
                 <div class="gif-box"><img src="https://media.tenor.com/0BlLAI6vIhoAAAAi/tkthao219-bubududu.gif"></div>
-                <p>I promise to handle your mood swings and love you even when you're angry.</p>
+                <p>Counting down the days until Feb 21st, 2026. 💍</p>
                 <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" style="z-index: 1;">
+            <div class="page" id="p4">
                 <h2>Forever Yours</h2>
                 <div class="gif-box"><img src="https://media.tenor.com/5T9NoewNL9EAAAAi/bubu-dudu.gif"></div>
-                <p>Happy Valentine's Day!<br>I love you so much.<br><br>- Vikas</p>
+                <p>Happy Valentine's Day, Seju!<br>I love you.<br><br>- Vikas</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. BACKGROUND HEARTS GENERATOR ---
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('bg-heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 5 + 's'; // 5-8 seconds
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            document.body.appendChild(heart);
-            
-            // Remove after animation to prevent memory leak
-            setTimeout(() => { heart.remove(); }, 8000);
-        }
-        setInterval(createHeart, 300); // Create a new heart every 300ms
-
-        // --- 2. NO BUTTON LOGIC ---
-        const noTexts = [
-            "Are you sure? 🥺", 
-            "Khushboo please...", 
-            "Don't do this to me! 😭", 
-            "I'm gonna cry...", 
-            "You're breaking my heart! 💔", 
-            "Just say YES! ❤️"
-        ];
-        // Reliable Tenor URLs for Sad Bears
+        // --- 1. PRELOAD IMAGES (Fixes "No GIF showing" issue) ---
         const sadGifs = [
             "https://media.tenor.com/83Jg63aA4sIAAAAj/bubu-dudu-cry.gif",
             "https://media.tenor.com/w1-nC1tS5PAAAAAj/bear-cry-sad.gif",
             "https://media.tenor.com/K2y1vIe4p4UAAAAj/cute-bear.gif"
         ];
         
+        // Preload loops in background
+        sadGifs.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        const noTexts = [
+            "Seju, please? 🥺", 
+            "Don't do this to me! 😭", 
+            "I'm gonna cry...", 
+            "Look at my sad face! 💔", 
+            "Just say YES! ❤️"
+        ];
+
         let clickCount = 0;
 
+        // --- 2. BACKGROUND HEARTS ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 10000);
+        }
+        setInterval(createHeart, 500);
+
+        // --- 3. BUTTON LOGIC ---
         function handleNo() {
             clickCount++;
             
-            // Update Text
-            const msgBox = document.getElementById('message-box');
-            msgBox.innerHTML = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
+            // Text Update
+            document.getElementById('message-box').innerText = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
             
-            // Update GIF
-            const mainGif = document.getElementById('main-gif');
-            mainGif.src = sadGifs[clickCount % sadGifs.length];
+            // GIF Update (Using preloaded logic)
+            document.getElementById('main-gif').src = sadGifs[clickCount % sadGifs.length];
             
-            // Grow Yes Button
+            // Button Growth
             const yesBtn = document.getElementById('yes-btn');
-            let scale = 1 + (clickCount * 0.15);
-            yesBtn.style.transform = `scale(${scale})`;
+            yesBtn.style.transform = `scale(${1 + clickCount * 0.2})`;
         }
 
-        // --- 3. YES BUTTON & CONFETTI ---
         function handleYes() {
             // Hide Proposal
-            const proposal = document.getElementById('proposal-container');
-            proposal.style.opacity = '0';
-            setTimeout(() => proposal.style.display = 'none', 500);
-
+            document.getElementById('proposal-container').classList.add('hidden');
+            
             // Show Celebration
             const celebration = document.getElementById('celebration-container');
             celebration.classList.remove('hidden');
             celebration.classList.add('fade-in');
 
-            // MASSIVE CONFETTI CANNON
-            const duration = 3000;
+            // --- MASSIVE 10-SECOND CELEBRATION ---
+            const duration = 10 * 1000; // 10 seconds
             const end = Date.now() + duration;
 
             (function frame() {
-                // Launch from left
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff0000', '#ffa500', '#ffff00'] // Warm colors
-                });
-                // Launch from right
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff0000', '#ffc0cb', '#800080'] // Pink/Purple
-                });
+                // Left & Right Cannons
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff0000', '#ffa500'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffc0cb', '#800080'] });
+
+                // Random Fireworks from bottom
+                if (Date.now() % 200 < 50) { // Every ~200ms
+                    confetti({
+                        startVelocity: 30,
+                        spread: 360,
+                        ticks: 60,
+                        origin: { x: Math.random(), y: Math.random() - 0.2 }
+                    });
+                }
 
                 if (Date.now() < end) {
                     requestAnimationFrame(frame);
                 }
             }());
 
-            // Transition to Book after 4 seconds
+            // Transition to Book
             setTimeout(() => {
                 celebration.style.opacity = '0';
                 setTimeout(() => {
@@ -345,25 +370,20 @@
                     const book = document.getElementById('book-wrapper');
                     book.style.display = 'block';
                     book.classList.add('fade-in');
-                }, 500);
-            }, 4000);
+                }, 800);
+            }, 10000); // Wait 10 seconds
         }
 
         // --- 4. BOOK LOGIC ---
         function checkPassword() {
-            const input = document.getElementById('password-input').value.toUpperCase();
-            if(input === "LOVE") {
-                document.getElementById('lock-screen').style.opacity = '0';
-                setTimeout(() => document.getElementById('lock-screen').style.display = 'none', 500);
+            const pass = document.getElementById('password-input').value.toUpperCase();
+            if (pass === "LOVE") {
+                const lock = document.getElementById('lock-screen');
+                lock.style.opacity = '0';
+                setTimeout(() => lock.style.display = 'none', 500);
             } else {
-                document.getElementById('error-msg').innerText = "Wrong password! Try 'LOVE'";
+                document.getElementById('error-msg').innerText = "Try 'LOVE'";
             }
         }
 
         function flipPage(btn) {
-            btn.closest('.page').classList.add('flipped');
-        }
-    </script>
-</body>
-</html>
-
