@@ -12,6 +12,7 @@
         
         body {
             height: 100vh;
+            width: 100vw;
             background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
             display: flex;
             justify-content: center;
@@ -20,52 +21,69 @@
             text-align: center;
         }
 
-        /* Utility Class to hide sections */
-        .hidden { display: none !important; opacity: 0; }
+        /* --- BACKGROUND HEARTS ANIMATION --- */
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            bottom: -50px;
+            animation: floatUp linear infinite;
+            z-index: 0; /* Behind everything */
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        }
+
+        /* --- UTILITIES --- */
+        .hidden { display: none !important; }
+        .fade-out { opacity: 0; transition: opacity 1s ease-out; pointer-events: none; }
+        .fade-in { opacity: 1; transition: opacity 1.5s ease-in; }
+
+        /* --- CONTAINER STYLES --- */
+        #proposal-container, #celebration-container, #book-wrapper {
+            position: relative;
+            z-index: 10; /* Above background hearts */
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.5s ease;
+        }
+
+        /* --- PROPOSAL SECTION --- */
+        .gif-container {
+            margin-bottom: 20px;
+        }
         
-        /* Fade transition */
-        .fade-in {
-            animation: fadeIn 1s ease-in forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* --- SECTION 1: THE PROPOSAL (Abhinav Style) --- */
-        #proposal-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            max-width: 90%;
-            z-index: 10;
-        }
-
         .gif-container img {
-            width: 200px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white; /* Placeholder in case gif loads slow */
         }
 
+        /* Text Styling */
         h1 {
             color: #d81b60;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
+            margin-bottom: 10px;
         }
 
         .emotional-text {
             color: #c2185b;
-            font-size: 1.2rem;
-            min-height: 30px;
+            font-size: 1.1rem;
+            min-height: 40px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: opacity 0.3s;
         }
 
+        /* Buttons */
         .btn-group {
-            margin-top: 20px;
             display: flex;
             gap: 20px;
             justify-content: center;
@@ -78,85 +96,65 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
         }
 
-        #yes-btn {
-            background-color: #4CAF50;
-            color: white;
-        }
+        #yes-btn { background: #ff4757; color: white; }
+        #yes-btn:active { transform: scale(0.95); }
 
-        #yes-btn:hover { transform: scale(1.1); }
+        #no-btn { background: #ffffff; color: #ff4757; }
 
-        #no-btn {
-            background-color: #f44336;
-            color: white;
-        }
-
-        /* --- SECTION 2: THE CELEBRATION (Intermediate) --- */
-        #celebration-container {
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- SECTION 3: THE BOOK (Your Code) --- */
+        /* --- BOOK SECTION --- */
         #book-wrapper {
-            display: none; /* Hidden by default */
             perspective: 1500px;
+            opacity: 0; /* Starts invisible */
+            display: none;
         }
 
         .book {
-            width: 340px;
-            height: 480px;
+            width: 320px;
+            height: 460px;
             position: relative;
             transform-style: preserve-3d;
+            margin: 0 auto;
         }
 
         .page {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #ff5f6d, #ffc371);
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             transform-origin: left;
             transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-            padding: 22px;
+            padding: 20px;
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            backface-visibility: hidden; /* Hides back of page */
+            background-color: white; /* Fallback */
         }
+        
+        /* Ensure pages stack correctly */
+        .page:nth-child(1) { z-index: 5; }
+        .page:nth-child(2) { z-index: 4; }
+        .page:nth-child(3) { z-index: 3; }
+        .page:nth-child(4) { z-index: 2; }
 
         .page.flipped { transform: rotateY(-180deg); }
-        
-        /* Book Content Styling */
-        .page h2 { font-size: 22px; margin-bottom: 10px; }
-        .page p { font-size: 16px; line-height: 1.4; }
-        .gif-box { background: rgba(255,255,255,0.3); padding: 10px; border-radius: 10px; width: 100%; margin: 10px 0; }
-        .gif-box img { width: 100%; border-radius: 8px; }
-        
-        .next-btn {
-            font-size: 24px;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-        
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
         /* Lock Screen */
         .lock-overlay {
             position: absolute;
             inset: 0;
-            background: #ff758c;
-            border-radius: 18px;
+            background: #ff6b81;
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -166,12 +164,25 @@
         
         .lock-input {
             padding: 10px;
-            border-radius: 8px;
+            border-radius: 50px;
             border: none;
-            margin: 10px 0;
+            margin: 15px 0;
             text-align: center;
             font-size: 16px;
+            width: 80%;
+            outline: none;
         }
+
+        .next-btn {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
     </style>
 </head>
@@ -179,159 +190,187 @@
 
     <div id="proposal-container">
         <div class="gif-container">
-            <img id="main-gif" src="https://media.tenor.com/y8U-50yA3OAAAAAj/cute-bear.gif" alt="Asking Bear">
+            <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmM2Z202b216YjZ5a2Z4b2Z4b2Z4b2Z4b2Z4b2Z4b2Z4b2Z4bSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/cLS1cfxvGOPVpf9g39/giphy.gif" alt="Asking Bear">
         </div>
         <h1>Will you be my Valentine?</h1>
-        
         <div id="message-box" class="emotional-text"></div>
-
         <div class="btn-group">
             <button id="yes-btn" onclick="handleYes()">YES! ❤️</button>
             <button id="no-btn" onclick="handleNo()">No</button>
         </div>
     </div>
 
-    <div id="celebration-container">
+    <div id="celebration-container" class="hidden" style="opacity: 0;">
         <div class="gif-container">
-            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Bear">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExanJqanJqanJqanJqanJqanJqanJqanJqanJqanJqanJqanJq/26BRv0ThflsHCqDrG/giphy.gif" alt="Hugging Bears">
         </div>
-        <h1 style="margin-top:20px;">I knew it! ❤️</h1>
-        <p style="font-size: 1.2rem; color: #fff;">Wait for it...</p>
+        <h1>YAY! I Love You! ❤️</h1>
+        <p style="font-size: 1.2rem; color: #d81b60; font-weight: bold; margin-top: 10px;">Wait for the surprise...</p>
     </div>
 
     <div id="book-wrapper">
         <div class="book">
-            <div class="page" style="z-index: 4;">
+            <div class="page">
                 <div class="lock-overlay" id="lock-screen">
                     <h2>One last step...</h2>
                     <p>Enter the password:</p>
                     <input type="password" id="password-input" class="lock-input" placeholder="Hint: L_ _ E">
-                    <button onclick="checkPassword()" style="font-size:16px; padding: 8px 20px; background: white; color: #ff758c;">Unlock</button>
+                    <button onclick="checkPassword()" style="padding: 8px 20px; border-radius: 20px; border:none; cursor:pointer;">Unlock</button>
                     <p id="error-msg" style="color: yellow; font-size: 14px; margin-top: 5px;"></p>
                 </div>
-                
                 <div class="page-content">
                     <h2>You unlocked my heart! 🌹</h2>
-                    <div class="gif-box">
-                        <img src="https://media.tenor.com/Ub6s6yD1WwEAAAAi/mochi-peach.gif" alt="Love">
-                    </div>
-                    <p>Khushboo, turn the pages to see why you are my favorite person.</p>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z6M3Z6M3Z6M3Z6M3Z6M3Z6M3Z6M3Z6M3Z6M3Z6/3o7TKoWXm3okO1kgHC/giphy.gif" style="width:100%; border-radius:10px;">
+                    <p>Khushboo, turn the pages to see why you are special.</p>
                     <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
                 </div>
             </div>
 
-            <div class="page" style="z-index: 3;">
+            <div class="page">
                 <h2>The Best Decision 💍</h2>
-                <div class="gif-box">
-                    <img src="https://media.tenor.com/mU_6Ym6V998AAAAi/milk-and-mocha-bear-couple.gif" alt="Together">
-                </div>
-                <p>I know we are getting married soon, but I still want to ask you out every single day.</p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZ4aGZ4aGZ4aGZ4aGZ4aGZ4aGZ4aGZ4aGZ4aGZ4/l4pTfx2qLSznacBZ6/giphy.gif" style="width:100%; border-radius:10px;">
+                <p>Asking you out was the best decision of my life. You are my safe place.</p>
                 <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" style="z-index: 2;">
+            <div class="page">
                 <h2>My Promise 🤞</h2>
-                <div class="gif-box">
-                    <img src="https://media.tenor.com/0BlLAI6vIhoAAAAi/tkthao219-bubududu.gif" alt="Promise">
-                </div>
-                <p>I promise to handle your mood swings and always bring you food when you're angry.</p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazZ5azZ5azZ5azZ5azZ5azZ5azZ5azZ5azZ5azZ5/3o7TKpCw5v2L3y6i5O/giphy.gif" style="width:100%; border-radius:10px;">
+                <p>I promise to always bring you food when you are angry and love you endlessly.</p>
                 <div class="next-btn" onclick="flipPage(this)">Next ➡️</div>
             </div>
 
-            <div class="page" style="z-index: 1;">
+            <div class="page">
                 <h2>Happy Valentine's! ❤️</h2>
-                <div class="gif-box">
-                    <img src="https://media.tenor.com/5T9NoewNL9EAAAAi/bubu-dudu.gif" alt="Happy">
-                </div>
-                <p>I love you more than words can say.<br><br>- Vikas</p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjlrbjlrbjlrbjlrbjlrbjlrbjlrbjlrbjlrbjlrbjlr/26FLdmIp6wJr91JAI/giphy.gif" style="width:100%; border-radius:10px;">
+                <p>I can't wait to marry you.<br><br>Forever Yours,<br>Vikas</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- DATA CONFIGURATION ---
+        // --- 1. BACKGROUND HEARTS ANIMATION ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px'; // Random size
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random speed
+            document.body.appendChild(heart);
+
+            // Remove after animation to prevent lag
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        // Create a heart every 300ms
+        setInterval(createHeart, 300);
+
+
+        // --- 2. PROPOSAL LOGIC ---
         const noTexts = [
-            "Khushboo, please?", 
-            "Don't do this to me! 🥺", 
-            "I'm going to cry...", 
-            "Khushboo, look at my sad face!", 
-            "Okay, now I'm actually crying 😭",
-            "Just press YES already! ❤️"
+            "Khushboo, please? 🥺", 
+            "Don't break my heart! 💔", 
+            "I'm going to cry... 😭", 
+            "Look at this sad face! 👇", 
+            "You are being mean! 😠",
+            "Just say YES already! ❤️"
         ];
         
+        // Using GIPHY links (more reliable than Tenor direct links)
         const sadGifs = [
-            "https://media.tenor.com/83Jg63aA4sIAAAAj/bubu-dudu-cry.gif", // Crying 1
-            "https://media.tenor.com/w1-nC1tS5PAAAAAj/bear-cry-sad.gif", // Crying 2
-            "https://media.tenor.com/K2y1vIe4p4UAAAAj/cute-bear.gif"     // Sad pleading
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTEzOTEzOTEzOTEzOTEzOTEzOTEzOTEzOTEzOTEzOTEz/OPU6pZ2CV89vW/giphy.gif", // Crying
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExanZ4anZ4anZ4anZ4anZ4anZ4anZ4anZ4anZ4anZ4/d2lcHJTG5Tqg/giphy.gif", // Sad Pout
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzN5bzN5bzN5bzN5bzN5bzN5bzN5bzN5bzN5bzN5/TRgyI2f0hRHBS/giphy.gif"  // Tantrum
         ];
 
         let clickCount = 0;
 
-        // --- FUNCTIONS ---
-
-        // 1. Handle "No" Click
         function handleNo() {
             clickCount++;
             
-            // 1. Add Text
+            // Update Text
             const msgBox = document.getElementById('message-box');
-            const newText = document.createElement('div');
-            // Cycle through texts if clicks exceed array length
-            newText.innerHTML = noTexts[Math.min(clickCount - 1, noTexts.length - 1)]; 
-            msgBox.appendChild(newText);
+            msgBox.innerHTML = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
             
-            // 2. Change GIF to Sad
+            // Update GIF (Modulus operator loops through the array)
             const mainGif = document.getElementById('main-gif');
-            // Cycle through sad GIFs
             mainGif.src = sadGifs[clickCount % sadGifs.length];
             
-            // 3. Make Yes Button Grow (Optional funny effect)
+            // Make YES button grow massive
             const yesBtn = document.getElementById('yes-btn');
-            let currentSize = 1.2 + (clickCount * 0.2);
-            yesBtn.style.transform = `scale(${currentSize})`;
+            yesBtn.style.transform = `scale(${1 + clickCount * 0.3})`;
         }
 
-        // 2. Handle "Yes" Click
+        // --- 3. CELEBRATION LOGIC (MASSIVE CONFETTI) ---
         function handleYes() {
-            // Hide Proposal
-            document.getElementById('proposal-container').classList.add('hidden');
-            
-            // Show Celebration
-            const celebration = document.getElementById('celebration-container');
-            celebration.style.display = 'flex';
-            celebration.classList.add('fade-in');
+            // 1. Hide Proposal container gracefully
+            const proposal = document.getElementById('proposal-container');
+            proposal.style.opacity = '0';
+            setTimeout(() => proposal.style.display = 'none', 500);
 
-            // Fire Confetti
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-            
-            // Wait 3 seconds, then show Book
+            // 2. Show Celebration Container
+            const celebration = document.getElementById('celebration-container');
+            celebration.classList.remove('hidden');
+            setTimeout(() => celebration.style.opacity = '1', 100);
+
+            // 3. TRIGGER MASSIVE CONFETTI
+            const duration = 3000; // 3 seconds
+            const end = Date.now() + duration;
+
+            (function frame() {
+                // Launch confetti from left edge
+                confetti({
+                    particleCount: 10,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0000', '#ffa500', '#ffff00', '#008000', '#0000ff', '#4b0082', '#ee82ee']
+                });
+                // Launch confetti from right edge
+                confetti({
+                    particleCount: 10,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0000', '#ffa500', '#ffff00', '#008000', '#0000ff', '#4b0082', '#ee82ee']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            // 4. Transition to Book after celebration
             setTimeout(() => {
-                celebration.classList.add('hidden');
-                const book = document.getElementById('book-wrapper');
-                book.style.display = 'block';
-                book.classList.add('fade-in');
-            }, 3500);
+                celebration.style.opacity = '0';
+                setTimeout(() => {
+                    celebration.style.display = 'none';
+                    const book = document.getElementById('book-wrapper');
+                    book.style.display = 'block';
+                    setTimeout(() => book.style.opacity = '1', 100);
+                }, 1000);
+            }, 4000);
         }
 
-        // 3. Book Logic
+        // --- 4. BOOK LOGIC ---
         function checkPassword() {
             const input = document.getElementById('password-input').value.toUpperCase();
             if(input === "LOVE") {
-                document.getElementById('lock-screen').classList.add('hidden');
+                document.getElementById('lock-screen').style.opacity = '0';
+                setTimeout(() => document.getElementById('lock-screen').style.display = 'none', 500);
             } else {
-                document.getElementById('error-msg').innerText = "Wrong password! Try 'LOVE'";
+                const error = document.getElementById('error-msg');
+                error.innerText = "Wrong password! Try 'LOVE'";
+                error.style.animation = "shake 0.5s";
+                setTimeout(() => error.style.animation = "", 500);
             }
         }
 
-        function flipPage(element) {
-            // Find the parent .page and add the flipped class
-            element.closest('.page').classList.add('flipped');
+        function flipPage(btn) {
+            btn.closest('.page').classList.add('flipped');
         }
-
     </script>
 </body>
 </html>
